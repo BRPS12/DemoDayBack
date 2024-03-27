@@ -24,17 +24,44 @@ export const getInstitute = async (id: string) => {
 export const createInstitute = async (input: {
   category: string;
   name: string;
-  image: string;
+  image: string[];
   review: string;
+  position: string[];
   description: string;
   backGroundImage: string;
-  specialCode: string;
+  userId: string;
 }) => {
   try {
-    const result = await prisma.institute.create({ data: input });
-    return result;
+    const user = await prisma.admin.findUnique({ where: { id: input.userId } });
+    if (user?.role === "admin") {
+      const result = await prisma.institute.create({ data: input });
+      return result;
+    } else {
+      throw new GraphQLError("Not organization");
+    }
   } catch (error) {
     console.error(error);
-    throw new GraphQLError("Error creating user");
+    throw new GraphQLError("Error creating institute");
+  }
+};
+
+export const changeStatus = async (id: string) => {
+  try {
+    const institute = await prisma.institute.findUnique({ where: { id } });
+    if (!institute) {
+      throw new Error("Institute not found");
+    }
+
+    const updatedInstitute = await prisma.institute.update({
+      where: { id },
+      data: {
+        pending: true,
+      },
+    });
+
+    return updatedInstitute;
+  } catch (error) {
+    console.error(error);
+    throw new GraphQLError("Error fetching users");
   }
 };

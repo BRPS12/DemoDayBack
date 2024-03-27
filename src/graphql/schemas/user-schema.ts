@@ -20,7 +20,6 @@ export const userTypeDefs = gql`
     name: String
     age: String
     phoneNumber: String
-    role: String
   }
 
   type Query {

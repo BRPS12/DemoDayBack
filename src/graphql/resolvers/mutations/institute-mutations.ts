@@ -1,3 +1,4 @@
+import { changeStatus } from "./../../../services/institute-service";
 import { createInstitute } from "@/services/institute-service";
 
 export const instituteMutations = {
@@ -9,12 +10,21 @@ export const instituteMutations = {
       input: {
         category: string;
         name: string;
-        image: string;
+        image: string[];
         review: string;
+        position: string[];
         description: string;
         backGroundImage: string;
-        specialCode: string;
+        userId: string;
       };
     }
   ) => createInstitute(input),
+  changeStatus: (
+    _: unknown,
+    {
+      id,
+    }: {
+      id: string;
+    }
+  ) => changeStatus(id),
 };

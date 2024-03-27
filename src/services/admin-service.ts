@@ -1,9 +1,9 @@
 import { prisma } from "@/utils/prisma";
 import { GraphQLError } from "graphql";
 import bcrypt from "bcryptjs";
-export const getUsers = async () => {
+export const getAdmins = async () => {
   try {
-    const result = await prisma.user.findMany();
+    const result = await prisma.admin.findMany();
     return result;
   } catch (error) {
     console.error(error);
@@ -11,9 +11,9 @@ export const getUsers = async () => {
   }
 };
 
-export const getUser = async (id: string) => {
+export const getAdmin = async (id: string) => {
   try {
-    const result = await prisma.user.findUnique({ where: { id } });
+    const result = await prisma.admin.findUnique({ where: { id } });
     return result;
   } catch (error) {
     console.error(error);
@@ -21,20 +21,20 @@ export const getUser = async (id: string) => {
   }
 };
 
-export const registerUser = async (input: {
+export const registerAdmin = async (input: {
   email: string;
   password: string;
   image: string;
   name: string;
-  age: string;
   phoneNumber: string;
+  specialCode: string;
 }) => {
   try {
     const hashedPassword = await bcrypt.hash(input.password, 10);
     const userInput = { ...input, password: hashedPassword };
 
-    const result = await prisma.user.create({
-      data: { ...userInput, role: "normal" },
+    const result = await prisma.admin.create({
+      data: { ...userInput, role: "admin" },
     });
     return result;
   } catch (error) {
@@ -43,9 +43,15 @@ export const registerUser = async (input: {
   }
 };
 
-export const requestLogin = async (email: string, password: string) => {
+export const requestLogin = async (
+  email: string,
+  password: string,
+  specialCode: string
+) => {
   try {
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.admin.findUnique({
+      where: { email, specialCode },
+    });
     if (!user) {
       throw new GraphQLError("User not found");
     }
@@ -63,11 +69,10 @@ export const requestLogin = async (email: string, password: string) => {
 };
 export default requestLogin;
 
-export const updateUser = async (
+export const updateAdmin = async (
   name: string,
   password: string,
   image: string,
-  age: string,
   id: string
 ) => {
   try {
@@ -75,9 +80,9 @@ export const updateUser = async (
     if (!user) {
       throw new GraphQLError("User not found");
     }
-    const updatedUser = await prisma.user.update({
+    const updatedUser = await prisma.admin.update({
       where: { id: user.id },
-      data: { name, password, image, age },
+      data: { name, password, image },
     });
     return updatedUser;
   } catch (error) {

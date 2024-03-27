@@ -1,3 +1,4 @@
+import { changeStatus } from "./../../services/institute-service";
 import { getInstitute } from "@/services/institute-service";
 import gql from "graphql-tag";
 
@@ -6,21 +7,24 @@ export const instituteTypeDefs = gql`
     id: ID!
     category: String
     name: String
-    image: String
+    image: [String]
     review: String
+    position: [String]
     description: String
     backGroundImage: String
-    specialCode: String
+    userId: String
+    pending: Boolean
   }
 
   input InstituteCreateInput {
     category: String
     name: String
-    image: String
+    image: [String]
     review: String
+    position: [String]
     description: String
     backGroundImage: String
-    specialCode: String
+    userId: String
   }
 
   type Query {
@@ -30,5 +34,6 @@ export const instituteTypeDefs = gql`
 
   type Mutation {
     createInstitute(input: InstituteCreateInput!): Institute!
+    changeStatus(id: ID!): Institute!
   }
 `;
