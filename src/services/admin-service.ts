@@ -43,7 +43,7 @@ export const registerAdmin = async (input: {
   }
 };
 
-export const requestLogin = async (
+export const requestAdminLogin = async (
   email: string,
   password: string,
   specialCode: string
@@ -67,7 +67,6 @@ export const requestLogin = async (
     throw new GraphQLError("Error fetching users");
   }
 };
-export default requestLogin;
 
 export const updateAdmin = async (
   name: string,

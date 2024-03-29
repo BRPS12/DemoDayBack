@@ -1,6 +1,8 @@
-import { changeStatus } from "./../../../services/institute-service";
-import { createInstitute } from "@/services/institute-service";
-
+import {
+  createInstitute,
+  changeStatus,
+  deleteInstitute,
+} from "@/services/institute-service";
 export const instituteMutations = {
   createInstitute: (
     _: unknown,
@@ -27,4 +29,12 @@ export const instituteMutations = {
       id: string;
     }
   ) => changeStatus(id),
+  deleteInstitute: (
+    _: unknown,
+    {
+      id,
+    }: {
+      id: string;
+    }
+  ) => deleteInstitute(id),
 };

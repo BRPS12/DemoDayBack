@@ -29,7 +29,7 @@ export const adminTypeDefs = gql`
 
   type Mutation {
     registerAdmin(input: AdminRegisterInput!): Admin!
-    requestLogin(
+    requestAdminLogin(
       email: String!
       password: String!
       specialCode: String!

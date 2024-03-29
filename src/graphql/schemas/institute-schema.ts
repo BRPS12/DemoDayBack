@@ -35,5 +35,6 @@ export const instituteTypeDefs = gql`
   type Mutation {
     createInstitute(input: InstituteCreateInput!): Institute!
     changeStatus(id: ID!): Institute!
+    deleteInstitute(id: ID!): Institute!
   }
 `;

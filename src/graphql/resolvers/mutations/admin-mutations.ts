@@ -1,6 +1,6 @@
 import {
   registerAdmin,
-  requestLogin,
+  requestAdminLogin,
   updateAdmin,
 } from "@/services/admin-service";
 export const adminMutations = {
@@ -19,14 +19,14 @@ export const adminMutations = {
       };
     }
   ) => registerAdmin(input),
-  requestLogin: (
+  requestAdminLogin: (
     _: unknown,
     {
       email,
       password,
       specialCode,
     }: { email: string; password: string; specialCode: string }
-  ) => requestLogin(email, password, specialCode),
+  ) => requestAdminLogin(email, password, specialCode),
   updateAdmin: (
     _: unknown,
     {

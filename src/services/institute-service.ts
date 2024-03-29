@@ -1,9 +1,12 @@
 import { prisma } from "@/utils/prisma";
 import { GraphQLError } from "graphql";
 
+const falseArrays = [] as Array<any>;
+
 export const getInstitutes = async () => {
   try {
     const result = await prisma.institute.findMany();
+    console.log(falseArrays);
     return result;
   } catch (error) {
     console.error(error);
@@ -35,6 +38,7 @@ export const createInstitute = async (input: {
     const user = await prisma.admin.findUnique({ where: { id: input.userId } });
     if (user?.role === "admin") {
       const result = await prisma.institute.create({ data: input });
+      falseArrays.push(result);
       return result;
     } else {
       throw new GraphQLError("Not organization");
@@ -58,10 +62,23 @@ export const changeStatus = async (id: string) => {
         pending: true,
       },
     });
-
+    const index = falseArrays.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      falseArrays.splice(index, 1);
+      console.log("Updated falseArrays after removal:", falseArrays);
+    }
     return updatedInstitute;
   } catch (error) {
     console.error(error);
-    throw new GraphQLError("Error fetching users");
+    throw new GraphQLError("Error fetching institutes");
+  }
+};
+export const deleteInstitute = async (id: string) => {
+  try {
+    const institute = prisma.institute.delete({ where: { id } });
+    return institute;
+  } catch (error) {
+    console.error(error);
+    throw new GraphQLError("Error deleteing institutes");
   }
 };
