@@ -1,5 +1,5 @@
-import { changeStatus } from "./../../services/institute-service";
-import { getInstitute } from "@/services/institute-service";
+import { Institute } from "./../generated/index";
+import { addReview } from "./../../services/institute-service";
 import gql from "graphql-tag";
 
 export const instituteTypeDefs = gql`
@@ -8,19 +8,20 @@ export const instituteTypeDefs = gql`
     category: String
     name: String
     image: [String]
-    review: String
+    review: Float
+    reviewCount: Int
     position: [String]
     description: String
     backGroundImage: String
     userId: String
     pending: Boolean
+    comment: [String]
   }
 
   input InstituteCreateInput {
     category: String
     name: String
     image: [String]
-    review: String
     position: [String]
     description: String
     backGroundImage: String
@@ -36,5 +37,8 @@ export const instituteTypeDefs = gql`
     createInstitute(input: InstituteCreateInput!): Institute!
     changeStatus(id: ID!): Institute!
     deleteInstitute(id: ID!): Institute!
+    addComment(id: ID!, comment: String!): Institute!
+    deleteComment(id: ID!, comment: String!): Institute!
+    addReview(id: ID!, review: Float!): Institute!
   }
 `;

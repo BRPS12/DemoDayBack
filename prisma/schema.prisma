@@ -37,10 +37,12 @@ model Institute {
   name            String
   category        String
   image           String[]
-  review          String
+  review          Float    @default(0)
+  reviewCount     Int      @default(0)
   position        String[]
   description     String
   backGroundImage String
   userId          String
   pending         Boolean  @default(false)
+  comment         String[]
 }

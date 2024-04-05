@@ -1,7 +1,11 @@
+import { comment } from "postcss";
 import {
   createInstitute,
   changeStatus,
   deleteInstitute,
+  addComment,
+  deleteComment,
+  addReview,
 } from "@/services/institute-service";
 export const instituteMutations = {
   createInstitute: (
@@ -13,7 +17,6 @@ export const instituteMutations = {
         category: string;
         name: string;
         image: string[];
-        review: string;
         position: string[];
         description: string;
         backGroundImage: string;
@@ -37,4 +40,34 @@ export const instituteMutations = {
       id: string;
     }
   ) => deleteInstitute(id),
+  addComment: (
+    _: unknown,
+    {
+      id,
+      comment,
+    }: {
+      id: string;
+      comment: string;
+    }
+  ) => addComment(id, comment),
+  deleteComment: (
+    _: unknown,
+    {
+      id,
+      comment,
+    }: {
+      id: string;
+      comment: string;
+    }
+  ) => deleteComment(id, comment),
+  addReview: (
+    _: unknown,
+    {
+      id,
+      review,
+    }: {
+      id: string;
+      review: number;
+    }
+  ) => addReview(id, review),
 };
