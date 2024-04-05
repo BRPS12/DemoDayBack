@@ -7,7 +7,6 @@ const falseArrays = [] as Array<any>;
 export const getInstitutes = async () => {
   try {
     const result = await prisma.institute.findMany();
-    console.log(falseArrays);
     return result;
   } catch (error) {
     console.error(error);
