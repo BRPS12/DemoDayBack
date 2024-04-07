@@ -14,8 +14,8 @@ export const adminMutations = {
         password: string;
         image: string;
         name: string;
-        phoneNumber: string;
-        specialCode: string;
+        phoneNumber: number;
+        specialCode: number;
       };
     }
   ) => registerAdmin(input),
@@ -25,7 +25,7 @@ export const adminMutations = {
       email,
       password,
       specialCode,
-    }: { email: string; password: string; specialCode: string }
+    }: { email: string; password: string; specialCode: number }
   ) => requestAdminLogin(email, password, specialCode),
   updateAdmin: (
     _: unknown,

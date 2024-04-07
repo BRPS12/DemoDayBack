@@ -7,7 +7,7 @@ export const instituteTypeDefs = gql`
     id: ID!
     category: String
     name: String
-    image: [String]
+    image: String
     review: Float
     reviewCount: Int
     position: [String]
@@ -21,7 +21,7 @@ export const instituteTypeDefs = gql`
   input InstituteCreateInput {
     category: String
     name: String
-    image: [String]
+    image: String
     position: [String]
     description: String
     backGroundImage: String

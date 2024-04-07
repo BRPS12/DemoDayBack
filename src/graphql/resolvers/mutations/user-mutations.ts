@@ -15,8 +15,8 @@ export const userMutations = {
         password: string;
         image: string;
         name: string;
-        age: string;
-        phoneNumber: string;
+        age: number;
+        phoneNumber: number;
         role: string;
       };
     }
@@ -38,7 +38,7 @@ export const userMutations = {
       image: string;
       name: string;
       id: string;
-      age: string;
+      age: number;
     }
   ) => updateUser(name, password, image, age, id),
 };

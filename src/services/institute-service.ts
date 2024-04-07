@@ -27,7 +27,7 @@ export const getInstitute = async (id: string) => {
 export const createInstitute = async (input: {
   category: string;
   name: string;
-  image: string[];
+  image: string;
   position: string[];
   description: string;
   backGroundImage: string;

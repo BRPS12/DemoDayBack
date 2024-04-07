@@ -16,7 +16,7 @@ export const instituteMutations = {
       input: {
         category: string;
         name: string;
-        image: string[];
+        image: string;
         position: string[];
         description: string;
         backGroundImage: string;

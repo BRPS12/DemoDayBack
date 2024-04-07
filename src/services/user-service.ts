@@ -26,15 +26,15 @@ export const registerUser = async (input: {
   password: string;
   image: string;
   name: string;
-  age: string;
-  phoneNumber: string;
+  age: number;
+  phoneNumber: number;
 }) => {
   try {
-    const hashedPassword = await bcrypt.hash(input.password, 10);
-    const userInput = { ...input, password: hashedPassword };
-
+    if (input.password.length < 8) {
+      throw new GraphQLError("Password must be at least 8 characters long");
+    }
     const result = await prisma.user.create({
-      data: { ...userInput, role: "normal" },
+      data: { ...input, role: "normal" },
     });
     return result;
   } catch (error) {
@@ -50,6 +50,7 @@ export const requestLogin = async (email: string, password: string) => {
       throw new GraphQLError("User not found");
     }
     const isPasswordValid = user.password === password;
+    console.log(user);
     if (isPasswordValid) {
       console.log("Login successful");
       return user;
@@ -67,7 +68,7 @@ export const updateUser = async (
   name: string,
   password: string,
   image: string,
-  age: string,
+  age: number,
   id: string
 ) => {
   try {

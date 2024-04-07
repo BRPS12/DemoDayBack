@@ -8,9 +8,9 @@ export const adminTypeDefs = gql`
     password: String!
     image: String
     name: String!
-    phoneNumber: String
+    phoneNumber: Float
     role: String
-    specialCode: String
+    specialCode: Float
   }
 
   input AdminRegisterInput {
@@ -18,8 +18,8 @@ export const adminTypeDefs = gql`
     password: String!
     image: String
     name: String
-    phoneNumber: String
-    specialCode: String
+    phoneNumber: Float
+    specialCode: Float
   }
 
   type Query {
@@ -32,7 +32,7 @@ export const adminTypeDefs = gql`
     requestAdminLogin(
       email: String!
       password: String!
-      specialCode: String!
+      specialCode: Float!
     ): Admin!
     updateAdmin(
       name: String!

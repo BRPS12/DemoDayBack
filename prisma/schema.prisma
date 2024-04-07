@@ -16,8 +16,8 @@ model User {
   password    String
   image       String
   name        String
-  age         String
-  phoneNumber String
+  age         Float
+  phoneNumber Float
   role        String
 }
 
@@ -27,16 +27,16 @@ model Admin {
   password    String
   image       String
   name        String
-  phoneNumber String
+  phoneNumber Float
   role        String
-  specialCode String
+  specialCode Float
 }
 
 model Institute {
   id              String   @id @default(nanoid()) @map("_id")
   name            String
   category        String
-  image           String[]
+  image           String
   review          Float    @default(0)
   reviewCount     Int      @default(0)
   position        String[]

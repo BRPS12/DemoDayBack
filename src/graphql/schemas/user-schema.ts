@@ -8,8 +8,8 @@ export const userTypeDefs = gql`
     password: String!
     image: String
     name: String!
-    age: String!
-    phoneNumber: String
+    age: Float!
+    phoneNumber: Float
     role: String
   }
 
@@ -18,8 +18,8 @@ export const userTypeDefs = gql`
     password: String!
     image: String
     name: String
-    age: String
-    phoneNumber: String
+    age: Float
+    phoneNumber: Float
   }
 
   type Query {
@@ -34,7 +34,7 @@ export const userTypeDefs = gql`
       name: String!
       password: String!
       image: String!
-      age: String!
+      age: Float!
       id: ID!
     ): User!
   }

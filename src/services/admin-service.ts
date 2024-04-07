@@ -26,15 +26,13 @@ export const registerAdmin = async (input: {
   password: string;
   image: string;
   name: string;
-  phoneNumber: string;
-  specialCode: string;
+  phoneNumber: number;
+  specialCode: number;
 }) => {
   try {
-    const hashedPassword = await bcrypt.hash(input.password, 10);
-    const userInput = { ...input, password: hashedPassword };
 
     const result = await prisma.admin.create({
-      data: { ...userInput, role: "admin" },
+      data: { ...input, role: "admin" },
     });
     return result;
   } catch (error) {
@@ -46,7 +44,7 @@ export const registerAdmin = async (input: {
 export const requestAdminLogin = async (
   email: string,
   password: string,
-  specialCode: string
+  specialCode: number
 ) => {
   try {
     const user = await prisma.admin.findUnique({
